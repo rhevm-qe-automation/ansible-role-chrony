@@ -1,6 +1,12 @@
 ---
 - name: Install the required packages in Redhat derivatives
-  yum: name=chrony state={{ chrony_pkg_state }}
+  yum:
+    name: chrony
+    state: "{{ chrony_pkg_state }}"
+  register: yum_result
+  until: yum_result is success
+  retries: 3
+  delay: 10
 
 - name: Check if ntpd service exists
   stat: path="/usr/lib/systemd/system/ntpd.service"

@@ -1,8 +1,8 @@
 ---
 - name: Install the required packages in Redhat derivatives
   yum:
-    name=chrony
-    state={{ chrony_pkg_state }}
+    name: chrony
+    state: "{{ chrony_pkg_state }}"
   register: yum_result
   until: yum_result is success
   retries: 3
